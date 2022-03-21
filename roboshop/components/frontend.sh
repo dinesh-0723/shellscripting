@@ -3,7 +3,7 @@
 USER_ID=$(id -u)
 if [ "$USER_ID" -ne 0 ];then
   echo "you should run your script as root user"
-  exit
+  exit 1
 fi
 echo -e "\e[36m Installing nginx \e[0m"
 yum install nginx -y
