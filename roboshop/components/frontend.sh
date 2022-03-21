@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USER_ID=$(id -u)
-if [ "$user_ID" -ne 0 ];then
+if [ "$USER_ID" -ne 0 ];then
   echo "you should run your script as root user"
   exit
 fi
