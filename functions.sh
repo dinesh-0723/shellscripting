@@ -4,3 +4,5 @@ print_message(){
   echo "this is devops class"
 }
 print_message
+print_message
+print_message
