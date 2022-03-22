@@ -1,4 +1,12 @@
 #!/bin/bash
+statcheck() {
+  if [ $1 -eq 0 ];then
+    echo -e "\e[32m success \e[0m"
+    else
+      echo -e "\e[31m failure \e[0m"
+     exit 2
+  fi
+}
 
 USER_ID=$(id -u)
 if [ "$USER_ID" -ne 0 ];then
@@ -7,6 +15,7 @@ if [ "$USER_ID" -ne 0 ];then
 fi
 echo -e "\e[36m Installing nginx \e[0m"
 yum install nginx -y
+statcheck $?
 echo -e "\e[36m downloading nginx content \e[0m"
 
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
