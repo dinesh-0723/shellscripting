@@ -16,30 +16,32 @@ if [ "$USER_ID" -ne 0 ];then
   echo "you should run your script as root user"
   exit 1
 fi
+LOG_FILE=/tmp/roboshop.log
+rm -rf $LOG_FILE
 print "Installing nginx"
-yum install nginx -y
+yum install nginx -y>>LOG_FILE
 statcheck $?
 
 print "downloading nginx content"
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip>>log_file
 statcheck $?
 
 print "cleaning nginx content"
-rm -rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/*>>log_file
 statcheck $?
 
 cd /usr/share/nginx/html/
 
 print "extracting archive"
-unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
+unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .>>LOG_FILE
 statcheck $?
 
 print "update roboshop configuration"
 rm -rf frontend-main README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
+mv localhost.conf /etc/nginx/default.d/roboshop.conf>>LOG_FILE
 statcheck $?
 
 print "starting nginx"
-systemctl restart nginx && systemctl enable nginx
+systemctl restart nginx && systemctl enable nginx>>LOG_FILE
 statcheck $?
 
