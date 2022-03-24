@@ -20,8 +20,7 @@ print "start mongodb"
 systemctl enable mongod &>>LOG_FILE && systemctl restart mongod &>>LOG_FILE
 statcheck $?
 
-print "start mongodb"
-systemctl start mongod
+
 
 
 
