@@ -1,4 +1,4 @@
 frontend:
 	bash components/frontend.sh
-mongod:
-    bash components/mongodb.sh
+mongodb:
+     bash components/mongodb.sh
