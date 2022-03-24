@@ -1,3 +1,4 @@
+
 statcheck() {
   if [ $1 -eq 0 ];then
     echo -e "\e[32m success \e[0m"
@@ -7,7 +8,7 @@ statcheck() {
   fi
 }
 print() {
-  echo -e "\n.......$1..............">>$LOG_FILE
+  echo -e "\n.......$1.............." &>>$LOG_FILE
   echo -e "\e[36m $1 \e[0m"
 }
 
