@@ -11,7 +11,7 @@ statcheck $?
 
 print "add application user"
 id ${APP_USER} &>>${LOG_FILE}
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
   useradd ${APP_USER} &>>${LOG_FILE}
 fi
 statcheck $?
@@ -22,6 +22,7 @@ statcheck $?
 
 print "cleanup old content"
 rm -rf /home/${APP_USER}/catalogue &>>${LOG_FILE}
+statcheck $?
 
 print "extract app content"
 cd /home/${APP_USER} &>>LOG_FILE && unzip -o /tmp/catalogue.zip &>>${LOG_FILE} && mv catalogue-main catalogue &>>${LOG_FILE}
