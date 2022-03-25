@@ -39,11 +39,11 @@ statcheck $?
 
 print "update roboshop configuration"
 rm -rf frontend-main README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf >>$LOG_FILE
-sed  -e '/catalogue/s/localhost/catsh.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
+sed -i -e '/catalogue/s/localhost/catsh.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
 statcheck $?
 
 print "starting nginx"
-systemctl restart nginx && systemctl enable nginx >>$LOG_FILE
+systemctl restart nginx &>>LOG_FILE && systemctl enable nginx &>>$LOG_FILE
 statcheck $?
 
