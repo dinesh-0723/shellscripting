@@ -24,17 +24,17 @@ yum install nginx -y >>$LOG_FILE
 statcheck $?
 
 print "downloading nginx content"
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" >>$LOG_FILE
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>$LOG_FILE
 statcheck $?
 
 print "cleaning nginx content"
-rm -rf /usr/share/nginx/html/* >>$LOG_FILE
+rm -rf /usr/share/nginx/html/* &>>$LOG_FILE
 statcheck $?
 
 cd /usr/share/nginx/html/
 
 print "extracting archive"
-unzip /tmp/frontend.zip >>$LOG_FILE && mv frontend-main/* . >>$LOG_FILE && mv static/* . >>$LOG_FILE
+unzip /tmp/frontend.zip &>>$LOG_FILE && mv frontend-main/* . &>>$LOG_FILE && mv static/* . &>>$LOG_FILE
 statcheck $?
 
 print "update roboshop configuration"
