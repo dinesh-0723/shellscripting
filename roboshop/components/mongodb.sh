@@ -2,11 +2,11 @@
 source components/common.sh
 
 print "Setup MongoDB"
-curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>LOG_FILE
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG_FILE
 statcheck $?
 
 print "Install Mongodb"
-yum install -y mongodb-org &>>LOG_FILE
+yum install -y mongodb-org &>>$LOG_FILE
 statcheck $?
 
 
@@ -16,18 +16,18 @@ statcheck $?
 
 
 print "start mongodb"
-systemctl enable mongod &>>LOG_FILE && systemctl restart mongod &>>LOG_FILE
+systemctl enable mongod &>>$LOG_FILE && systemctl restart mongod &>>$LOG_FILE
 statcheck $?
 
 print "download schema"
-curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>LOG_FILE
+curl -f -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG_FILE
 statcheck $?
 
 print "extract schema"
-cd /tmp &>>LOG_FILE && unzip -o mongodb.zip &>>LOG_FILE
+cd /tmp &>>$LOG_FILE && unzip -o mongodb.zip &>>$LOG_FILE
 statcheck $?
 
 print "load schema"
-cd mongodb-main && mongo < catalogue.js &>>LOG_FILE && mongo < users.js &>>LOG_FILE
+cd mongodb-main && mongo < catalogue.js &>>$LOG_FILE && mongo < users.js &>>$LOG_FILE
 statcheck $?
 
