@@ -25,7 +25,7 @@ rm -rf /home/${APP_USER}/catalogue &>>${LOG_FILE}
 statcheck $?
 
 print "extract app content"
-cd /home/${APP_USER} &>>LOG_FILE && unzip -o /tmp/catalogue.zip &>>${LOG_FILE} && mv catalogue-main catalogue &>>${LOG_FILE}
+cd /home/${APP_USER} &>>${LOG_FILE} && unzip -o /tmp/catalogue.zip &>>${LOG_FILE} && mv catalogue-main catalogue &>>${LOG_FILE}
 statcheck $?
 
 print "install app dependencies"
@@ -41,7 +41,7 @@ sed -i -e 's/MONGO_DNSNAME/monodsh.roboshop.internal/' /home/roboshop/catalogue/
 statcheck $?
 
 print "start catalogue service"
-systemctl daemon-reload &>>${LOG_FILE} && systemctl restart catalogue &>>${LOG_FILE} && systemctl enable catalogue &>>{LOG_FILE}
+systemctl daemon-reload &>>${LOG_FILE} && systemctl restart catalogue &>>${LOG_FILE} && systemctl enable catalogue &>>${LOG_FILE}
 statcheck $?
 
 
