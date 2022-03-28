@@ -58,7 +58,7 @@ NODEJS() {
   statcheck $?
 
   print "setup systemd file"
-  sed -i -e 's/MONGO_DNSNAME/monodsh.roboshop.internal/' -e 's/REDIS_ENDPOINT/newredis.roboshop.internal/' -e 's/MONGO_ENDPOINT/newuser.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
+  sed -i -e 's/MONGO_DNSNAME/monodsh.roboshop.internal/' -e 's/REDIS_ENDPOINT/newredis.roboshop.internal/' -e 's/MONGO_ENDPOINT/monodsh.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>${LOG_FILE}
   statcheck $?
 
   print "start ${COMPONENT} service"
