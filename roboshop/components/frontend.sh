@@ -44,6 +44,7 @@ for component in catalogue user cart; do
   echo -e "updating $component configuration"
 sed -i -e "/${component}/s/localhost/${component}.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
 statcheck $?
+done
 
 print "starting nginx"
 systemctl restart nginx &>>LOG_FILE && systemctl enable nginx &>>$LOG_FILE
