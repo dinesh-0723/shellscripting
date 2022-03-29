@@ -40,7 +40,8 @@ statcheck $?
 print "update roboshop configuration"
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
-sed -i -e '/catalogue/s/localhost/catsh.roboshop.internal/' -e '/user/s/localhost/newuser.roboshop.internal/' -e '/cart/s/localhost/newcart.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
+for component in catalogue user cart; do
+sed -i -e "/${component}/s/localhost/${component}.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
 statcheck $?
 
 print "starting nginx"
