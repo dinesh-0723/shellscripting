@@ -10,6 +10,11 @@ AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Pra
 SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=allow-all-from-public | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g'
 )
 echo $AMI_ID
-aws ec2 run-instances --image-id ${AMI_ID} --instance-type t3.small --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=${COMPONENT}}]" --instance-market-options MarkeType=string | jq
-
+aws ec2 run-instances \
+--image-id ${AMI_ID} \
+ --instance-type t3.small \
+  --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=${COMPONENT}}]" \
+   --instance-market-options "MarkeType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
+    --security-group-ids=${SG_ID} \
+     | jq
 
