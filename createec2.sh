@@ -14,7 +14,7 @@ aws ec2 run-instances \
 --image-id ${AMI_ID} \
  --instance-type t3.small \
   --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=${COMPONENT}}]" \
-   --instance-market-options "MarkeType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
+   --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
     --security-group-ids=${SG_ID} \
      | jq
 
