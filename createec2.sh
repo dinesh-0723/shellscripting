@@ -1,4 +1,3 @@
-aws ec2 run-instances \
-    --image-id ami-ami-0bb6af715826253bf \
-    --instance-type t3.small \
-    --key-name MyKeyPair
+#!/bin/bash
+AMI ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" | jq '.Images[].ImageId')
+echo $AMI ID
