@@ -20,8 +20,8 @@ if [ -z "$1" ]; then
 
 
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" | jq '.Images[].ImageId' | sed -e 's/"//g')
-SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=allow-all-from-public | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g'
-)
+SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=allow-all-from-public | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')
+
   }
   if [ "$1" == "all" ]; then
     for component in catalogue cart frontend shipping payment rabbitmq mysql mongodb redis user ; do
